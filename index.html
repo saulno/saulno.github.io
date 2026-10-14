@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Saul Neri — Notes</title>
+  <meta name="description" content="Personal site and writing of Saul Neri.">
+  <script>
+    try { var t = localStorage.getItem("theme");
+      if (t === "dark" || t === "light") document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <defs>
+        <pattern id="hatch" width="2.6" height="2.6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <line x1="0" y1="0" x2="0" y2="2.6" stroke="currentColor" stroke-width="0.95"/>
+        </pattern>
+      </defs>
+      <filter id="f-tm" x="-20%" y="-20%" width="140%" height="140%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="11"/>
+        <feDisplacementMap in="SourceGraphic" scale="1.4"/>
+      </filter>
+      <path class="tm-hatch tm-half-r" d="M12 4 a 8 8 0 0 1 0 16 Z" filter="url(#f-tm)"/>
+      <path class="tm-hatch tm-half-l" d="M12 4 a 8 8 0 0 0 0 16 Z" filter="url(#f-tm)"/>
+      <path class="tm-stroke" d="M16.5 5.5 A 8 8 0 1 0 19 10" filter="url(#f-tm)"/>
+    </svg>
+  </button>
+
+  <header class="masthead">
+    <p class="site-title">Saul Neri</p>
+    <p class="site-sub">notes, written slowly</p>
+  </header>
+
+  <main>
+    <section class="about" aria-labelledby="about-h">
+      <h2 id="about-h">About</h2>
+      <p>
+        I'm Saul. I make things with computers and think too much about
+        things that don't need them. This site is where I write. No
+        analytics, no comments, no feed to chase. Just words on a page.
+      </p>
+      <p>
+        <a href="mailto:saulneri@protonmail.com">saulneri@protonmail.com</a>
+      </p>
+    </section>
+
+    <section class="writing" aria-labelledby="writing-h">
+      <h2 id="writing-h">Writing</h2>
+      <!-- posts:start -->
+    <ol class="post-list" reversed>
+        <li>
+          <a href="posts/la-ilusion-de-la-ilusion-del-control.html">La ilusión de La Ilusión del Control</a>
+          <time datetime="2025-10-12">2025-10-12</time>
+        </li>
+        <li>
+          <a href="posts/a-plain-web.html">A plain web</a>
+          <time datetime="2025-10-04">2025-10-04</time>
+        </li>
+        <li>
+          <a href="posts/on-slow-software.html">On building software</a>
+          <time datetime="2025-10-01">2025-10-01</time>
+        </li>
+    </ol>
+    <!-- posts:end -->
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Saul Neri · <a href="https://github.com/saulno">github</a></p>
+  </footer>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var btn = document.querySelector(".theme-toggle");
+      function dark() {
+        return root.dataset.theme ? root.dataset.theme === "dark"
+          : matchMedia("(prefers-color-scheme: dark)").matches;
+      }
+      function sync() { btn.setAttribute("aria-pressed", String(dark())); }
+      btn.addEventListener("click", function () {
+        root.dataset.theme = dark() ? "light" : "dark";
+        try { localStorage.setItem("theme", root.dataset.theme); } catch (e) {}
+        sync();
+      });
+      sync();
+    })();
+  </script>
+</body>
+</html>
